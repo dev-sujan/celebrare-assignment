@@ -67,9 +67,7 @@ const ImageUploader = () => {
               onClick={toggleModal}
             />
           ) : (
-            <div className="text-center">
-              Please select an Image for Preview
-            </div>
+            <div className="text-center">Please select an Image</div>
           ))}
       </div>
 
