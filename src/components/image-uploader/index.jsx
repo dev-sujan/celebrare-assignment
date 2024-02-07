@@ -3,7 +3,6 @@ import { images } from "../../constants/images.js";
 import useModal from "../modal/useModal.jsx";
 import { useState } from "react";
 
-
 const ImageUploader = () => {
   const [isModalOpen, toggleModal] = useModal();
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
@@ -12,6 +11,7 @@ const ImageUploader = () => {
   const importData = () => {
     let input = document.createElement("input");
     input.type = "file";
+    input.accept = "image/*";
     input.click();
 
     input.onchange = (e) => {
@@ -43,20 +43,24 @@ const ImageUploader = () => {
 
   return (
     <>
-      <section className="flex flex-col items-center justify-center w-11/12 gap-3 m-4 py-4 border border-gray-300 rounded-xl shadow-sm">
+      <section className="mx-auto my-4 flex w-11/12  flex-col items-center justify-center gap-3 rounded-xl border border-gray-300 py-4 shadow-sm">
         <h3>Upload Image</h3>
         <button
           onClick={importData}
-          className="bg-[#088178] px-5 py-2 text-teal-50 text-sm rounded-md"
+          className="rounded-md bg-[#088178] px-5 py-2 text-sm text-teal-50"
         >
           Choose from Device
         </button>
       </section>
-      <div className="flex items-center justify-center">
+      <div className="mx-auto flex w-11/12 items-center justify-center">
         {isModalOpen ||
           (imagePreviewUrl ? (
             <img
-              className={`h-72 w-96 ${selectedMask? "object-fill" : "object-contain"}`}
+              className={`  ${
+                selectedMask
+                  ? "object-full h-96 w-full"
+                  : "h-[30rem] w-full  object-contain object-top"
+              }`}
               src={imagePreviewUrl}
               alt="image"
               style={imgStyle}
@@ -74,22 +78,24 @@ const ImageUploader = () => {
         <div className="flex items-center justify-center">
           <div className="p-4">
             <img
-              className={`h-48 w-72 ${selectedMask? "object-fill" : "object-contain"}`}
+              className={`h-48 w-72 ${
+                selectedMask ? "object-fill" : "object-contain object-center"
+              }`}
               src={imagePreviewUrl}
               alt="image"
               style={imgStyle}
             />
           </div>
         </div>
-        <div className="flex items-center justify-evenly cursor-pointer">
+        <div className="mx-auto flex max-w-96 cursor-pointer items-center justify-evenly">
           <div
-            className="p-1 border-2 rounded-md"
+            className="rounded-md border-2 p-1"
             onClick={() => handleMaskSelect("original")}
           >
             Original
           </div>
           {images.map((image, id) => (
-            <div key={id} className="p-1 border-2 rounded-md">
+            <div key={id} className="rounded-md border-2 p-1">
               <img
                 src={image}
                 alt="frame"
@@ -102,7 +108,7 @@ const ImageUploader = () => {
         <div className="flex items-center justify-center">
           <button
             onClick={toggleModal}
-            className="bg-teal-700 rounded-md text-teal-50 text-sm w-11/12 max-w-72 py-2"
+            className="w-11/12 max-w-80 rounded-md bg-teal-700 py-2 text-sm text-teal-50"
           >
             Use this image
           </button>
