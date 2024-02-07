@@ -3,6 +3,7 @@ import { images } from "../../constants/images.js";
 import useModal from "../modal/useModal.jsx";
 import { useState } from "react";
 
+
 const ImageUploader = () => {
   const [isModalOpen, toggleModal] = useModal();
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
@@ -51,11 +52,11 @@ const ImageUploader = () => {
           Choose from Device
         </button>
       </section>
-      <div className="w-11/12 flex items-center justify-center">
+      <div className="flex items-center justify-center">
         {isModalOpen ||
           (imagePreviewUrl ? (
             <img
-              className={`object-fill h-96 w-96`}
+              className={`h-72 w-96 ${selectedMask? "object-fill" : "object-contain"}`}
               src={imagePreviewUrl}
               alt="image"
               style={imgStyle}
@@ -73,7 +74,7 @@ const ImageUploader = () => {
         <div className="flex items-center justify-center">
           <div className="p-4">
             <img
-              className="h-48 w-72 object-fill"
+              className={`h-48 w-72 ${selectedMask? "object-fill" : "object-contain"}`}
               src={imagePreviewUrl}
               alt="image"
               style={imgStyle}
