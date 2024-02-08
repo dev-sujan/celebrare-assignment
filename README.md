@@ -1,22 +1,8 @@
 # Celebrare Assignment
 
 This project is a React application created using Vite. It serves as the assignment for the Celebrare company.
-
-## Preview
-
 ![image](https://github.com/dev-sujan/celebrare-assignment/assets/121967553/8e4a13df-57be-4449-bef7-f70e3482baa1)
-![image](https://github.com/dev-sujan/celebrare-assignment/assets/121967553/de90f7c5-8069-44f6-b62a-427cca4e3532)
-![image](https://github.com/dev-sujan/celebrare-assignment/assets/121967553/c4242541-3945-49b2-bb1b-9539417b168a)
-
 ![image](https://github.com/dev-sujan/celebrare-assignment/assets/121967553/9085c2c9-259e-4fa8-a331-e6c6ec073bfe)
-
-![image](https://github.com/dev-sujan/celebrare-assignment/assets/121967553/60b34181-dc6c-41e9-99da-1120c48997b9)
-
-![image](https://github.com/dev-sujan/celebrare-assignment/assets/121967553/d95c4e61-4f6e-43c3-827a-71a67587907e)
-
-
-
-
 
 
 ## Getting Started
