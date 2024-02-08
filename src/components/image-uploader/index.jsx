@@ -1,12 +1,56 @@
 import Modal from "../modal/index.jsx";
 import { images } from "../../constants/images.js";
 import useModal from "../modal/useModal.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ImageUploader = () => {
   const [isModalOpen, toggleModal] = useModal();
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [selectedMask, setSelectedMask] = useState(null);
+
+  useEffect(() => {
+    const dropZone = document.getElementById("drop-zone");
+    dropZone.addEventListener("dragenter", handleDragEnter);
+    dropZone.addEventListener("dragover", handleDragOver);
+    dropZone.addEventListener("dragleave", handleDragLeave);
+    dropZone.addEventListener("drop", handleDrop);
+
+    return () => {
+      dropZone.removeEventListener("dragenter", handleDragEnter);
+      dropZone.removeEventListener("dragover", handleDragOver);
+      dropZone.removeEventListener("dragleave", handleDragLeave);
+      dropZone.removeEventListener("drop", handleDrop);
+    };
+  }, []);
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.currentTarget.classList.add("border-4");
+    e.currentTarget.classList.add("border-blue-500");
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.currentTarget.classList.remove("border-4");
+    e.currentTarget.classList.remove("border-blue-500");
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.currentTarget.classList.remove("border-4");
+    e.currentTarget.classList.remove("border-blue-500");
+
+    const files = e.dataTransfer.files;
+    handleFileUpload(files[0]);
+  };
 
   const importData = () => {
     let input = document.createElement("input");
@@ -16,16 +60,17 @@ const ImageUploader = () => {
 
     input.onchange = (e) => {
       e.preventDefault();
-
-      let reader = new FileReader();
-      let inputFile = e.target.files[0];
-
-      reader.onloadend = () => {
-        setImagePreviewUrl(reader.result);
-        toggleModal();
-      };
-      reader.readAsDataURL(inputFile);
+      handleFileUpload(e.target.files[0]);
     };
+  };
+
+  const handleFileUpload = (file) => {
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result);
+      toggleModal();
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleMaskSelect = (mask) => {
@@ -44,13 +89,18 @@ const ImageUploader = () => {
   return (
     <>
       <section className="mx-auto my-4 flex w-11/12  flex-col items-center justify-center gap-3 rounded-xl border border-gray-300 py-4 shadow-sm">
-        <h3>Upload Image</h3>
-        <button
-          onClick={importData}
-          className="rounded-md bg-[#088178] px-5 py-2 text-sm text-teal-50"
+        <div
+          id="drop-zone"
+          className="rounded-md border-2 border-dashed px-20 py-2 text-sm text-gray-700"
         >
-          Choose from Device
-        </button>
+          <p className="text-center">Drag & Drop or</p>
+          <button
+            onClick={importData}
+            className="mt-2 rounded-md bg-[#088178] px-5 py-2 text-sm text-teal-50"
+          >
+            Choose from Device
+          </button>
+        </div>
       </section>
       <div className="mx-auto flex w-11/12 items-center justify-center">
         {isModalOpen ||
