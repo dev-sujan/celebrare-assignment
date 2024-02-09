@@ -88,10 +88,10 @@ const ImageUploader = () => {
 
   return (
     <>
-      <section className="mx-auto my-4 flex w-11/12  flex-col items-center justify-center gap-3 rounded-xl border border-gray-300 py-4 shadow-sm">
+      <section className="mx-auto my-4 flex w-11/12 flex-col  items-center justify-center gap-3 rounded-xl border border-gray-300 px-[5%] py-4 shadow-sm">
         <div
           id="drop-zone"
-          className="rounded-md border-2 border-dashed px-20 py-2 text-sm text-gray-700"
+          className="flex w-full flex-col items-center justify-center rounded-md border-2 border-dashed py-2 text-sm text-gray-700"
         >
           <p className="text-center">Drag & Drop or</p>
           <button
